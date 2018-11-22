@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- ETIQUETAS THYMELEAF th 
+		como bajo el puntero person apuntamos a un objeto complejo
+		de tipo person, podemos acceder a los atributos de ese objeto
+	-->
+	<h1>HELLO <span th:text="${person.name}"></span>!</h1>
+	<h2>Your age is <span th:text="${person.age}"> years</span>!</h2>
+
+</body>
+</html>
