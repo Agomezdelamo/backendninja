@@ -1,5 +1,9 @@
 #todas las configuraciones de propiedades de spring
-#https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+#puerto personalizado
+server:
+  port:  8090
+
 
 #habilitar jdbc
 spring:

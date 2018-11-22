@@ -9,8 +9,22 @@
 		como bajo el puntero person apuntamos a un objeto complejo
 		de tipo person, podemos acceder a los atributos de ese objeto
 	-->
-	<h1>HELLO <span th:text="${person.name}"></span>!</h1>
-	<h2>Your age is <span th:text="${person.age}"> years</span>!</h2>
+	<h1>HELLO</h1>
+	
+	<table>
+		<thead>
+			<tr>
+			<th>NAME</th>
+			<th>AGE</th>
+			</tr>
+		</thead>	
+		<tbody th:each="persona : ${listaPersonas}">
+			<tr>
+				<th th:text="${persona.name}"></th>
+				<th th:text="${persona.age}"></th>
+			</tr>
+		</tbody>
+	</table>
 
 </body>
 </html>
