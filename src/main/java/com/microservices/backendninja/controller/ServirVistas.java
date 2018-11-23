@@ -14,7 +14,7 @@ import com.microservices.backendninja.model.Person;
 
 @Controller
 @RequestMapping("/example")
-public class ExampleController {
+public class ServirVistas {
 	
 	public static final String EXAMPLE_VIEW = "example";
 	

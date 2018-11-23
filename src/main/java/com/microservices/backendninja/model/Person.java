@@ -22,5 +22,7 @@ public class Person {
 		this.age = age;
 	}
 	
+	public Person() {}
+	
 	 
 }
