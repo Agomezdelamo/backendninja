@@ -1,0 +1,35 @@
+#todas las configuraciones de propiedades de spring
+
+#puerto personalizado
+server:
+  port:  8030
+#ocultar pagina error tomcat?  
+  error:
+    whitelabel:
+      enabled:
+        false
+#directorio por defecto para paginas de error
+    path:
+      /error
+
+#habilitar jdbc
+spring:
+  data: 
+    jdbc:
+      repositories:
+        enabled: true
+  banner:
+    location: classpath:static/bannerpersonalizado.txt
+   
+#configuracion para thymeleaf
+  thymeleaf:
+    #spring detecta si la vista a sido modificada, si esto esta a true, y la vista no esta modificada la coge de cache, mejora rendimiento
+    cache: true 
+    #spring comprueba si la template existe antes de renderizar
+    check-template: true
+    #spring comprueba si el directorio del template existe antes de renderizar
+    check-template-location: true
+    #directorio para que spring busque las vistas
+    prefix: classpath:/templates/
+    #sufijo de las vistas
+    suffix: .html
