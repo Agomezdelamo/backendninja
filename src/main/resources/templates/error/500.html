@@ -36,7 +36,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"></span>Volver</a></li>
+        <li><a href="#">Volver</a></li>
       </ul>
     </div>
   </div>
@@ -44,14 +44,12 @@
 
 <div class="jumbotron">
   <div class="container text-center">
-  <img src="../static/imgs/2.png">
+   <img src="../static/imgs/3.png"  th:src="@{/imgs/3.png}">
     <h1>Error...</h1>
-    <p>Not every contact sends data to the user, for example the 404 request (page not found) and the requests for pages that are already loaded...</p>
+    <h2 th:text="${errormsg}"></h2>
+    <p>There is a problem with the resource you are looking for, and it cannot be displayed.</p>
   </div>
 </div>
   
-
-
 </body>
 </html>
-

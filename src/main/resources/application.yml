@@ -2,8 +2,15 @@
 
 #puerto personalizado
 server:
-  port:  8090
-
+  port:  8030
+#ocultar pagina error tomcat?  
+  error:
+    whitelabel:
+      enabled:
+        false
+#directorio por defecto para paginas de error
+    path:
+      /error
 
 #habilitar jdbc
 spring:
@@ -26,4 +33,3 @@ spring:
     prefix: classpath:/templates/
     #sufijo de las vistas
     suffix: .html
-    

@@ -3,6 +3,8 @@ package com.microservices.backendninja.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.microservices.backendninja.model.Person;
+import com.microservices.backendninja.services.FirstService;
 
 @Controller
 @RequestMapping("/example")
 public class ServirVistas {
 	
 	public static final String EXAMPLE_VIEW = "example";
+	
+	@Autowired
+	@Qualifier("firstServiceProduccion")
+	//ponemos el tipo de la interfaz, porque de esa forma si tenemos dos implementaciones o 10, podemos cambiar solo el qualifier, y que el new se haga del valor de qualifier
+	FirstService personService;
 	
 	/**
 	 * Primera forma
@@ -61,11 +69,8 @@ public class ServirVistas {
 	
 	//metodo que emula la recuperación de lista de bbdd
 	public List<Person> getPeople() {
-		List<Person> personList = new ArrayList<>();
-		personList.add(new Person("juan",22));
-		personList.add(new Person("Alberto",32));
-		personList.add(new Person("pedro",42));
-		personList.add(new Person("luis",12));
+		List<Person> personList = personService.getListPeople();
+
 		
 		return personList;
 	}
