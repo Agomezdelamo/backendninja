@@ -20,7 +20,31 @@ spring:
         enabled: true
   banner:
     location: classpath:static/bannerpersonalizado.txt
-   
+    
+   #definir el jdbc
+  datasource:
+    url: jdbc:mysql://localhost:3306/tablas_basicas?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+  #configuracion jpa
+  jpa:
+    #mostrar querys en log
+    show-sql: true
+    
+    #preferencias especificas hibernate
+    hibernate:
+      #cuando arrancas el servidor, comprueba las entitys contra las tablas, si no se corresponden
+      #va a hacer "update" para actualizar las tablas, mandan las entity contra las tablas
+      ddl-auto: update
+      #el dialecto que va a usar al hacer las consultas
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+       
+    properties:
+      hibernate:
+        #el dialecto que va a usar al hacer las consultas
+        dialect: org.hibernate.dialect.MySQL5Dialect
+     
 #configuracion para thymeleaf
   thymeleaf:
     #spring detecta si la vista a sido modificada, si esto esta a true, y la vista no esta modificada la coge de cache, mejora rendimiento
