@@ -32,6 +32,8 @@ public class CourseController {
 		LOG.info("Call : listAllCourses");
 		ModelAndView mav = new ModelAndView(COURSE_VIEW);
 		mav.addObject("courses", courseService.listAllCourses());
+		//creamos un objeto vacio para que tyeleaf pueda usarlo en el form, y todos los input se seteen contra este objeto, es el que guarda los datos para mandar al post
+		mav.addObject("course", new Course());
 		return mav;
 	}
 	
@@ -41,6 +43,6 @@ public class CourseController {
 		LOG.info("Call : addCourse --> param = " + c.toString());
 
 		courseService.addCourse(c);
-		return "redirect:/course/listCourses";
+		return "redirect:/course/listcourses";
 	}
 }
