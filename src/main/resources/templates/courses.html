@@ -15,11 +15,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="course : ${courses}">
+			<tr th:each="course : ${courseList}">
 				<th><span th:text="${course.name}"></span></th>
-				<th><span th:text="${course.price}"></span></th>
 				<th><span th:text="${course.description}"></span></th>
 				<th><span th:text="${course.hours}"></span></th>
+				<th><span th:text="${course.price}"></span></th>
+				<p><a th:href="${'/course/edit?nameparam=' + {course.name} + '&priceparam=' + {course.price}}" >Editar </a></p>
 			</tr>
 		</tbody>
 	</table>
@@ -30,6 +31,7 @@
 		<p>Price: <input type="text" th:field="*{price}"/></p>
 		<p>Hours: <input type="text" th:field="*{hours}"/></p>
 		<p><input type="submit" value="enviar"/></p>
+		
 	</form>
 </body>
 </html>

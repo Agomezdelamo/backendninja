@@ -1,5 +1,7 @@
 package com.microservices.backendninja.services.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -9,33 +11,62 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.microservices.backendninja.controller.CourseController;
+import com.microservices.backendninja.converter.CourseConverter;
 import com.microservices.backendninja.entitys.Course;
+import com.microservices.backendninja.model.CourseModel;
 import com.microservices.backendninja.repository.CourseJpaRepository;
 import com.microservices.backendninja.services.CourseService;
+
 
 @Service("courseServiceImpl")
 public class CourseServiceImpl implements CourseService {
 
 	private static final Log LOG = LogFactory.getLog(CourseServiceImpl.class);
 
+	@Autowired
+	@Qualifier("courseConverter")
+	private CourseConverter converter;
 	
 	@Autowired
 	@Qualifier("courseJpaRepository")
 	private CourseJpaRepository repository;
-
+	
 	@Override
-	public List<Course> listAllCourses() {
-		LOG.info("call : listAllCourses param --> " );
+	public CourseModel getByNameOrPrice(String name, int price) {
+		return converter.entity2model(repository.findByNameOrPrice(name, price));
+	};
 
-		return repository.findAll();
+	
+	@Override
+	public List<CourseModel> listAllCourses() {
+		LOG.info("call : listAllCourses param --> " );
+		
+		//aplicamos lógica de negocio para convertir la lista de Entitys a Lista de Models y que la vista lo entienda
+		List<CourseModel> list2View = new ArrayList<CourseModel>();
+		
+		//consulta db
+		List<Course> listRepo = repository.findAll();
+		
+		Iterator i = listRepo.iterator();
+		
+		while(i.hasNext()) {
+			Course c = (Course) i.next();
+			CourseModel cm = converter.entity2model(c);
+			list2View.add(cm);
+		}
+		
+		return list2View;
 	}
 
 	@Override
-	public Course addCourse(Course course) {
-		LOG.info("call : addCourse param --> " + course.toString());
+	public CourseModel addCourse(CourseModel courseModel) {
+		LOG.info("call : addCourse param --> " + courseModel.toString());
 
-		// save devuelve el objeto guardado
-		return repository.save(course);
+		//aplicamos lógica de negocio para convertir el Model a Entity y que el DAO lo entienda
+		Course course = converter.model2entity(courseModel);
+		
+		// save devuelve el objeto guardado como entity y lo transformamos a la vista
+		return converter.entity2model(repository.save(course));
 	}
 
 	@Override
@@ -46,12 +77,15 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Course updateCourse(Course course) {
-		LOG.info("call : updateCourse param --> " + course.toString());
-
+	public CourseModel updateCourse(CourseModel courseModel) {
+		LOG.info("call : updateCourse param --> " + courseModel.toString());
+		
+		//aplicamos lógica de negocio para convertir el Model a Entity y que el DAO lo entienda
+		Course course = converter.model2entity(courseModel);
+		
 		// en este caso va a intentar guardar el curso que queramos guardar, si
 		// esta relleno, hace un update
-		return repository.save(course);
+		return converter.entity2model(repository.save(course));
 	}
 
 }

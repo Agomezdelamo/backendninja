@@ -5,14 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.microservices.backendninja.entitys.Course;
+import com.microservices.backendninja.model.CourseModel;
 
 public interface CourseService {
+	CourseModel getByNameOrPrice(String name, int price);
 	
-	List<Course> listAllCourses();
+	List<CourseModel> listAllCourses();
 	
-	Course addCourse(Course course);
+	CourseModel addCourse(CourseModel courseModel);
 	
 	int deleteCourse(int id);
 	
-	Course updateCourse(Course course);
+	CourseModel updateCourse(CourseModel courseModel);
 }

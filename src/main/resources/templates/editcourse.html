@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<form action="#" th:action="@{/course/editcourse}" th:object="${courseEdit}" method="post">
+		<p>Name: <input type="text" th:field="*{name}"/></p>
+		<p>Description: <input type="text" th:field="*{description}"/></p>
+		<p>Price: <input type="text" th:field="*{price}"/></p>
+		<p>Hours: <input type="text" th:field="*{hours}"/></p>
+		<p><input type="submit" value="enviar"/></p>
+	</form>
+</body>
+</html>
