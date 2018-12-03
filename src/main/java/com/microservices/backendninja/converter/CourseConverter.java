@@ -12,6 +12,7 @@ public class CourseConverter {
 	public CourseModel entity2model(Course course) {
 		CourseModel courseModel = new CourseModel();
 		
+		courseModel.setId(Integer.toString(course.getId()));	
 		courseModel.setName(course.getName());	
 		courseModel.setDescription(course.getDescription());
 		courseModel.setHours(course.getHours());	

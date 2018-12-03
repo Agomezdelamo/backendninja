@@ -8,7 +8,7 @@ import com.microservices.backendninja.entitys.Course;
 import com.microservices.backendninja.model.CourseModel;
 
 public interface CourseService {
-	CourseModel getByNameOrPrice(String name, int price);
+	CourseModel getById(String id);
 	
 	List<CourseModel> listAllCourses();
 	
@@ -16,5 +16,5 @@ public interface CourseService {
 	
 	int deleteCourse(int id);
 	
-	CourseModel updateCourse(CourseModel courseModel);
+	CourseModel updateCourse(CourseModel courseModel, String id);
 }

@@ -6,11 +6,12 @@
 </head>
 <body>
 	
-	<form action="#" th:action="@{/course/editcourse}" th:object="${courseEdit}" method="post">
+	<form action="#" th:action="${'/course/editcourse?idparam=' + {id}}" th:object="${courseEdit}" method="post">
 		<p>Name: <input type="text" th:field="*{name}"/></p>
 		<p>Description: <input type="text" th:field="*{description}"/></p>
 		<p>Price: <input type="text" th:field="*{price}"/></p>
 		<p>Hours: <input type="text" th:field="*{hours}"/></p>
+		<input type="hidden" th:field="${id}"/>
 		<p><input type="submit" value="enviar"/></p>
 	</form>
 </body>

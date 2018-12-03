@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,21 +53,22 @@ public class CourseController {
 	
 	//metodo que lista los cursos disponibles en bbdd
 	@GetMapping("/edit")
-	public ModelAndView editCourse(@RequestParam(name="nameparam") String name, @RequestParam(name="priceparam") String price){
+	public ModelAndView editCourse(@RequestParam(name="idparam") String id){
 		LOG.info("Call : editCourses");
 		
 		ModelAndView mav = new ModelAndView(COURSE_EDIT_VIEW);
 		//paso 0 para q solo tire del nombre
-		mav.addObject("courseEdit", courseService.getByNameOrPrice(name, 0));
+		mav.addObject("courseEdit", courseService.getById(id));
+		mav.addObject("id", id);
 		return mav;
 	}
 	
 	//metodo que inserta un curso en bbdd y redirige a listCourses con el curso ya añadido
 	@PostMapping("/editcourse")
-	public String editCourse(@ModelAttribute("course") CourseModel c) {
+	public String editCourse(@ModelAttribute("course") CourseModel c, @RequestParam("idparam") String id) {
 		LOG.info("Call : editCourse --> param = " + c.toString());
 		
-		courseService.updateCourse(c);
+		courseService.updateCourse(c,id);
 		return "redirect:/course/listcourses";
 	}
 }

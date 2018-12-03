@@ -32,8 +32,8 @@ public class CourseServiceImpl implements CourseService {
 	private CourseJpaRepository repository;
 	
 	@Override
-	public CourseModel getByNameOrPrice(String name, int price) {
-		return converter.entity2model(repository.findByNameOrPrice(name, price));
+	public CourseModel getById(String id) {
+		return converter.entity2model(repository.findById(Integer.valueOf(id)).get());
 	};
 
 	
@@ -77,24 +77,19 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public CourseModel updateCourse(CourseModel courseModel) {
+	public CourseModel updateCourse(CourseModel courseModel, String id) {
 		LOG.info("call : updateCourse param --> " + courseModel.toString());
-		
-		//trato de traerlo del repo (con la ñapa esta, al final no me garantiza q sea unico...
-		Course course = repository.findByNameOrPrice(courseModel.getName(), 0);
-		//sino esta...
-		if(course == null) {
-			//aplicamos lógica de negocio para convertir el Model a Entity y que el DAO lo entienda
-			course = converter.model2entity(courseModel);
-		} else {
-			//asi mantiene el id de referencia y se machaca..
-			course.setName(courseModel.getName());
-			course.setHours(courseModel.getHours());
-			course.setPrice(courseModel.getPrice());
-			course.setDescription(courseModel.getDescription());
-		}
-		
-		
+			Course course = repository.findById(Integer.valueOf(id)).get();
+			if( course == null) {
+				//aplicamos lógica de negocio para convertir el Model a Entity y que el DAO lo entienda
+				course = converter.model2entity(courseModel);
+				
+			} else {
+				course = converter.model2entity(courseModel);
+				course.setId(Integer.valueOf(id));
+			}
+	
+	
 		// en este caso va a intentar guardar el curso que queramos guardar, si
 		// esta relleno, hace un update, ojo, no pilla bien el update, he tenido q traerlo de db para q lo pille bien
 		return converter.entity2model(repository.save(course));
