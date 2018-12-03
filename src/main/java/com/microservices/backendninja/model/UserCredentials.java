@@ -24,5 +24,9 @@ public class UserCredentials {
 		this.pass = pass;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserCredentials [user=" + user + ", pass=" + pass + "]";
+	}
 	
 }
