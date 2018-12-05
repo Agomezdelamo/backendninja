@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.microservices.backendninja.constants.ViewConstants;
 import com.microservices.backendninja.model.UserCredentials;
 
 @Controller
@@ -35,7 +36,7 @@ public class LoginController {
 		model.addAttribute("error", error);
 		model.addAttribute("userCredentials", new UserCredentials());
 		LOG.info("returning to login view");
-		return "login";
+		return ViewConstants.LOGIN;
 	}
 	
 	//recibe un atributo del modelo de tipo model attribute
@@ -45,7 +46,7 @@ public class LoginController {
 
 		if(userPass.getUser().equals("user") && userPass.getPass().equals("pass")) {
 			LOG.info("returning to contacts view");
-			return "contacts";			
+			return ViewConstants.REDIRECT + ViewConstants.CONTACTS + "/" + ViewConstants.SHOW_CONTACTS;			
 
 		} else {
 			LOG.info("redirect to login error");
