@@ -13,12 +13,6 @@ import com.microservices.backendninja.constants.ViewConstants;
 public class LoginController {
 	
 	private static final Log LOG = LogFactory.getLog(LoginController.class); 
-	
-	@GetMapping("/")
-	public String redirectToLogin(){
-		LOG.info("METHOD: redirectToLogin()");
-		return "redirect:/login";
-	}
 
 	@GetMapping("/login")
 	public String showLoginForm(Model model, 
@@ -36,7 +30,7 @@ public class LoginController {
 	}
 	
 	//loginSucces o la barra / entran por aqui, OJO AQUI MAPEAMOS 2 PATH
-	@GetMapping({"/loginSuccess", "/"})
+	@GetMapping({"/loginsuccess", "/"})
 	public String loginCheck(){
 		LOG.info("METHOD: loginSuccess");
 		LOG.info("returning to contacts view");

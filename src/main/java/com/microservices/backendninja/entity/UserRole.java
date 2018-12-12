@@ -13,21 +13,20 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "user_roles", uniqueConstraints = @UniqueConstraint(columnNames = { "role", "username" }))																						// unique
 public class UserRole {
-
-	@Id
-	@GeneratedValue
+	
 
 	/**
 	 * @Column(unique = true) is a shortcut to UniqueConstraint
 	 * when it is only a single field
 	 */
+	@Id
+	@GeneratedValue
 	@Column(name="user_role_id",unique=true,nullable=false)
 	private Integer userRoleId;
 
-	// esta columna va unida a la tabla user, mediante username, de forma vaga,
-	// es decir, no
-	// te traes el objeto entero en la sessión, y no puede ser null
-	@ManyToOne(fetch = FetchType.LAZY)
+	// esta columna va unida a la tabla user, mediante username, de forma entera EAGER,
+	// es decir, te traes el objeto entero en la sessión, y no puede ser null
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "username", nullable = false)
 	private User user;
 

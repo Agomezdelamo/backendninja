@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,6 +20,8 @@ import com.microservices.backendninja.services.impl.UserServiceImpl;
  */
 @Configuration
 @EnableWebSecurity
+//anotación que habilita el control el acceso a los métodos de los controladores según la seguridad
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -55,10 +58,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/css/*","/imgs/*").permitAll()
 		//aqui indicamos que el resto de request necesitan autenticar o logar para poder acceder
 		.anyRequest().authenticated()
-		//aqui indicamos cual es la página de login y cual es la url que luego procesa a ese path
-		.and().formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
+		//aqui indicamos cual es la página de login
+		.and().formLogin().loginPage("/login")
+		//Es el path encargado de iniciar el proceso de login, se pone en el post del formulario HTML. Spring Security lo realiza por detrás.
+		.loginProcessingUrl("/logincheck")
 		//aqui indicamos los parametros de entrada de user y pass que estan puestos en la vista del formulario
-		.usernameParameter("userParam").passwordParameter("passwordParam")
+		.usernameParameter("userparam").passwordParameter("passwordparam")
 		//aqui indicamos una página a la que dirigirse una vez estas logado 
 		//(el requestPath del controlador que esta en la clase LoginController) y esa pagina esta abierta sin securizar
 		.defaultSuccessUrl("/loginsuccess").permitAll()

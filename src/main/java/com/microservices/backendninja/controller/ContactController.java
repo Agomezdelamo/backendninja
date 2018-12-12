@@ -27,6 +27,15 @@ public class ContactController {
 	@Qualifier("contactServiceImpl")
 	private ContactService service;
 
+	/**
+	 * Con esta anotación securizas un método java de spring a determinados roles
+	 * 1. puedes ponerla a nivel de clase
+	 * 2. puedes ponerla a nivel de metodo
+	 * 3. puedes ponerla en servicios o controladores
+	 * 
+	 * Si no cumple ese rol el usuario que trata de invocar el metodo la petición devolveria un 403 (no autorizado)
+	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
 	@GetMapping("/contactForm")
 	public String redirectContactForm(@RequestParam(name="id", required=false) int id , Model model) {
 		ContactModel contact = new ContactModel();

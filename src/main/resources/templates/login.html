@@ -18,7 +18,7 @@
 
     <div class="container">
 
-      <form class="form-signin" method="post" th:action="@{/loginCheck}" >
+      <form class="form-signin" th:action="@{/logincheck}" method="POST">
       	<!-- INDICAMOS EL TOKEN DE SEGURIDAD QUE VA EN UN PARAMETRO OCULTO DE CONFIGURACIÓN PARA EVITAR VULNERABILIDADES WEB -->
       	<input type="hidden" name="${_csrf.parameterName" value="${_csrf.token}" />
       	
@@ -26,11 +26,11 @@
         <label for="inputEmail" class="sr-only">Username</label>
         
         <!-- parametro de entrada de username -->
-        <input type="text" name="userParam" id="userParam" class="form-control" placeholder="Username"/>
+        <input type="text" name="userparam" id="userparam" class="form-control" placeholder="Username"/>
         <label for="inputPassword" class="sr-only">Password</label>
         
         <!-- parametro de entrada de password -->
-        <input type="password" name="passwordParam" id="passwordParam" class="form-control" placeholder="Password"/>
+        <input type="password" name="passwordparam" id="passwordparam" class="form-control" placeholder="Password"/>
         <div class="alert alert-danger " role="alert" th:if="${error != null}">Invalid username or password</div>
         <div class="alert alert-info " role="alert" th:if="${logout != null}">Logout successfully!</div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,7 +59,7 @@ public class UserServiceImpl implements UserDetailsService {
 
 		// los tres true son: usuario no expirado, 
 		// credenciales no expirados, cuenta no bloqueada
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), "{bcrypt}" + user.getPassword(),
 				user.isEnabled(), true, true, true, authorities);
 	}
 
