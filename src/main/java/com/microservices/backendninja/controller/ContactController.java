@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.microservices.backendninja.constants.ViewConstants;
@@ -27,14 +28,18 @@ public class ContactController {
 	private ContactService service;
 
 	@GetMapping("/contactForm")
-	public String redirectContactForm(Model model) {
-		model.addAttribute("contactModel", new ContactModel());
+	public String redirectContactForm(@RequestParam(name="id", required=false) int id , Model model) {
+		ContactModel contact = new ContactModel();
+		if(id != 0) {
+			 contact = service.findContactByIdModel(id);			
+		}
+		model.addAttribute("contactModel", contact);
 		return ViewConstants.CONTACT_FORM;
 	}
 
 	@GetMapping("/cancel")
 	public String cancel(Model model) {
-		return ViewConstants.CONTACTS;
+		return ViewConstants.REDIRECT + ViewConstants.CONTACTS + "/" + ViewConstants.SHOW_CONTACTS;			
 	}
 
 	@PostMapping("/addcontact")
@@ -48,6 +53,12 @@ public class ContactController {
 		
 	
 		return ViewConstants.REDIRECT + ViewConstants.CONTACTS + "/" + ViewConstants.SHOW_CONTACTS;			
+	}
+	
+	@GetMapping("/removecontact")
+	public ModelAndView removeContact(@RequestParam(name="id", required=true) int id) {
+		service.removeContact(id);
+		return showContacts();
 	}
 	
 	@GetMapping("/showcontacts") 

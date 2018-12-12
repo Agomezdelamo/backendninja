@@ -11,4 +11,10 @@ public interface ContactService {
 	
 	List<ContactModel> listAllContacts();
 	
+	Contact findContactById(int id);
+	
+	ContactModel findContactByIdModel(int id);
+	
+	void removeContact(int id);
+	
 }

@@ -36,4 +36,24 @@ public class ContactServiceImpl implements ContactService {
 		return repository.findAll().stream().map(item -> converter.entity2Model(item)).collect(Collectors.toList());
 	}
 
+	@Override
+	public Contact findContactById(int id) {
+		return repository.findById(id);
+	}
+	
+
+	@Override
+	public ContactModel findContactByIdModel(int id) {
+		return converter.entity2Model(findContactById(id));
+	}
+
+	@Override
+	public void removeContact(int id) {
+		Contact contact = findContactById(id);
+		
+		if(contact != null) {
+			repository.delete(contact);			
+		}
+	}
+
 }

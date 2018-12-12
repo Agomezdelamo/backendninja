@@ -5,12 +5,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.microservices.backendninja.constants.ViewConstants;
-import com.microservices.backendninja.model.UserCredentials;
 
 @Controller
 public class LoginController {
@@ -34,24 +31,16 @@ public class LoginController {
 
 		model.addAttribute("logout", logout);
 		model.addAttribute("error", error);
-		model.addAttribute("userCredentials", new UserCredentials());
 		LOG.info("returning to login view");
 		return ViewConstants.LOGIN;
 	}
 	
-	//recibe un atributo del modelo de tipo model attribute
-	@PostMapping
-	public String loginCheck(@ModelAttribute(name="userCredentials") UserCredentials userPass){
-		LOG.info("METHOD: loginCheck() PARAMS -> userCredentials " + userPass.toString());
+	//loginSucces o la barra / entran por aqui, OJO AQUI MAPEAMOS 2 PATH
+	@GetMapping({"/loginSuccess", "/"})
+	public String loginCheck(){
+		LOG.info("METHOD: loginSuccess");
+		LOG.info("returning to contacts view");
+		return ViewConstants.REDIRECT + ViewConstants.CONTACTS + "/" + ViewConstants.SHOW_CONTACTS;			
 
-		if(userPass.getUser().equals("user") && userPass.getPass().equals("pass")) {
-			LOG.info("returning to contacts view");
-			return ViewConstants.REDIRECT + ViewConstants.CONTACTS + "/" + ViewConstants.SHOW_CONTACTS;			
-
-		} else {
-			LOG.info("redirect to login error");
-			return "redirect:/login?error";
-
-		}
 	}
 }
