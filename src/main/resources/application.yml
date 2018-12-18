@@ -26,9 +26,9 @@ spring:
     url: jdbc:mysql://localhost:3306/tablas_basicas?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     #pass mysqlwindows
-    password: root
     #pass mysqlmac
     #password: root1234
+    password: root
   #configuracion jpa
   jpa:
     #mostrar querys en log

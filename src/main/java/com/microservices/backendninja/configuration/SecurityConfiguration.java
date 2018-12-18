@@ -70,7 +70,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//aqui indicamos cual es la página de logout
 		.and().logout().logoutUrl("/logout")
 		//aqui indicamos una página a la que dirigirse una vez estas deslogado y esa pagina esta abierta sin securizar
-		.logoutSuccessUrl("/login?logout").permitAll();
+		.logoutSuccessUrl("/login?logout").permitAll()
+		//pagina de acceso denegador
+		.and().exceptionHandling().accessDeniedPage("/403");
 		
 	}
 
