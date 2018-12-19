@@ -66,6 +66,14 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
+		
+		<!-- plugin spring loaded para cambios en caliente -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>springloaded</artifactId>
+		    <version>1.2.0.RELEASE</version>
+		</dependency>
+				
 	</dependencies>
 
 

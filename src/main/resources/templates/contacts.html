@@ -20,7 +20,7 @@
 
 	<div class="container">
 
-		<h1>Hello, user!</h1>
+		<h1>Hello, <span th:text="${username}"></span></h1>
 		<br />
 		<div class="panel panel-default">
 			<div class="panel-heading"></div>
@@ -72,6 +72,12 @@
 				Logout
 			</button>
 		</form>
+		
+		
+		<a href="#" th:href="@{/rest/checkrest}">
+				Rest Request
+		</a> 
+		
 		<div class="alert alert-success" role="alert" th:if="${result == 1}">Added
 			successfully!</div>
 		<div class="alert alert-danger" role="alert" th:if="${result == 0}">Error

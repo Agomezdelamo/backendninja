@@ -21,7 +21,7 @@ spring:
   banner:
     location: classpath:static/bannerpersonalizado.txt
     
-   #definir el jdbc
+  #definir el jdbc
   datasource:
     url: jdbc:mysql://localhost:3306/tablas_basicas?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
@@ -51,7 +51,7 @@ spring:
 #configuracion para thymeleaf
   thymeleaf:
     #spring detecta si la vista a sido modificada, si esto esta a true, y la vista no esta modificada la coge de cache, mejora rendimiento
-    cache: true 
+    cache: false 
     #spring comprueba si la template existe antes de renderizar
     check-template: true
     #spring comprueba si el directorio del template existe antes de renderizar
